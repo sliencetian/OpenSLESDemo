@@ -7,9 +7,6 @@
 
 #include <SLES/OpenSLES.h>
 #include <SLES/OpenSLES_Android.h>
-
-#include <SLES/OpenSLES.h>
-#include <SLES/OpenSLES_Android.h>
 #include <stdio.h>
 #include "AudioEngine.h"
 #include <queue>

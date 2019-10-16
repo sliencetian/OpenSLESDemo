@@ -14,8 +14,6 @@ public:
     SLObjectItf engineObj;
     SLEngineItf engine;
 
-    SLObjectItf outputMixObj;
-
 private:
     void createEngine() {
         SLresult result;
@@ -32,22 +30,9 @@ private:
         assert(SL_RESULT_SUCCESS == result);
         (void) result;
 
-        const SLInterfaceID ids[1] = {SL_IID_ENVIRONMENTALREVERB};
-        const SLboolean req[1] = {SL_BOOLEAN_FALSE};
-        // outputMixObj 用于输出声音数据
-        (*engine)->CreateOutputMix(engine, &outputMixObj, 1, ids, req);
-
-        result = (*outputMixObj)->Realize(outputMixObj, SL_BOOLEAN_FALSE);
-        assert(SL_RESULT_SUCCESS == result);
-        (void) result;
     }
 
     virtual void release() {
-        if (outputMixObj) {
-            (*outputMixObj)->Destroy(outputMixObj);
-            outputMixObj = nullptr;
-        }
-
         if (engineObj) {
             (*engineObj)->Destroy(engineObj);
             engineObj = nullptr;
@@ -56,7 +41,7 @@ private:
     }
 
 public:
-    AudioEngine() : engineObj(nullptr), engine(nullptr), outputMixObj(nullptr) {
+    AudioEngine() : engineObj(nullptr), engine(nullptr) {
         createEngine();
     }
 
